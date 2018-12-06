@@ -1,0 +1,2 @@
+# DCGen
+Diffusion Curve Generator
