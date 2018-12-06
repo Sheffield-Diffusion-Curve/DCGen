@@ -1,11 +1,15 @@
 Package: DCGen
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A Bass diffusion curve generator
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Chu-Chang Ku
+Maintainer: TimeWz667 <TimeWz667@gmail.com>
+Description: A Bass diffusion curve generator
+License: MIT
+Keywords: Bass diffusion, elicitation, health economics
 Encoding: UTF-8
 LazyData: true
+Imports:
+  triangle
+  deSolve
+RoxygenNote: 6.1.1
