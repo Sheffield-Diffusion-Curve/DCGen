@@ -1,8 +1,8 @@
 #' Generate a Bass Diffusion curve in continuous time approach
 #'
 #' @param m upper bound of the number of adoptions
-#' @param p the coefficient of innovation
-#' @param q the coefficient of imitation
+#' @param p coefficient of innovation
+#' @param q coefficient of imitation
 #' @param t_min initial time point
 #' @param t_max the end of time frame
 #' @param dt observation interval
@@ -38,10 +38,10 @@ generate_diffusion_continuous <- function(m, p, q, t_min=0, t_max=20, dt=1, ...)
 #' Translation of parameters between (m, p , q) and (m, n1, t)
 #'
 #' @param m upper bound of the number of adoptions
-#' @param p the coefficient of innovation
-#' @param q the coefficient of imitation
-#' @param n1 the cumulative adoptions in the first period
-#' @param t the timing when new adoptions start decreasing
+#' @param p coefficient of innovation
+#' @param q coefficient of imitation
+#' @param n1 cumulative adoptions in the first period
+#' @param t timing when new adoptions start decreasing
 #'
 #' @return
 #' @export
@@ -49,8 +49,6 @@ generate_diffusion_continuous <- function(m, p, q, t_min=0, t_max=20, dt=1, ...)
 #' @examples
 pq2nt_continuous <- function(m, p, q) {
   res <- list(m=m)
-
-  parameters <- c(m=m, p=p, q=q)
 
   res$t <- log(q/p)/(p+q)
   epq <- exp(-(p+q))
