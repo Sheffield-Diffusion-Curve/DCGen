@@ -11,7 +11,10 @@
 #' @export
 #'
 #' @examples
-#'
+#' dc <- generate_diffusion_discrete(140, 0.03, 0.41)
+#' dc <- ts(dc[2:3], 0)
+#' ts.plot(dc, col=c("green", "blue"))
+#' legend("right", lty=1, legend=c("N", "dN"), col=c("green", "blue"))
 generate_diffusion_discrete <- function(m, p, q, t_min=0, t_max=20, dt=1) {
   if (t_min > t_max) {
     stop("t_min must be smaller than t_max")
@@ -56,6 +59,8 @@ generate_diffusion_discrete <- function(m, p, q, t_min=0, t_max=20, dt=1) {
 #' @export
 #'
 #' @examples
+#' pq2nt_discrete(140, 0.03, 0.41)
+#' nt2pq_discrete(140, 5.94, 5.08)
 pq2nt_discrete <- function(m, p, q, dt=0.01) {
   res <- list(m=m)
 
@@ -88,15 +93,19 @@ pq2nt_discrete <- function(m, p, q, dt=0.01) {
 
 #' @rdname pq2nt_discrete
 #' @export
-nt2pq_discrete <- function(m, n1, t) {
+nt2pq_discrete <- function(m, n1, t, wt=c(0.5, 0.5)) {
   if (n1 > m) {
     stop("n1 must be smaller than m")
+  }
+
+  if (length(wt) != 2 | any(wt < 0)) {
+    stop("wt must be a vector with positive values")
   }
 
   fr <- function(x) {
     sol <- pq2nt_discrete(m, x[1], x[2])
 
-    sum((c(n1, t) - c(sol$n1, sol$t))^2 * c(1, 1))
+    sum((c(n1, t) - c(sol$n1, sol$t))^2 * wt)
   }
 
   precision <- 0.01
