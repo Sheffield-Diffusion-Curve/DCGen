@@ -2,14 +2,21 @@
 % Please edit documentation in R/elc_input.R
 \name{input_elcitation}
 \alias{input_elcitation}
+\alias{print.elc.input}
 \title{Input elicitation data}
 \usage{
 input_elcitation(dist, pars)
+
+\method{print}{elc.input}(elc, ...)
 }
 \arguments{
 \item{dist}{distribution of the input among ["Gamma", "Normal", "LogNormal", "StudentT", "Triangle"]}
 
 \item{pars}{a vector of parameters}
+
+\item{elc}{an elcitation object to be print}
+
+\item{...}{additional arguments passed to the integrator or to the methods}
 }
 \value{
 An elc.input object
@@ -18,6 +25,6 @@ An elc.input object
 Input elicitation data
 }
 \examples{
-elc <- input_elcitation("Gamma")
+elc <- input_elcitation("Gamma", c(0.1, 0.01))
 elc
 }

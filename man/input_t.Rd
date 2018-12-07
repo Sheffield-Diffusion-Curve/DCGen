@@ -16,6 +16,6 @@ An elc.input object
 Input elicitation data as a student t distribution
 }
 \examples{
-elc <- input_t(c(0.1, 0.1))
+elc <- input_t(c(10, 1, 20))
 elc
 }

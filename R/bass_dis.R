@@ -46,7 +46,7 @@ generate_diffusion_discrete <- function(m, p, q, t_min=0, t_max=20, dt=1) {
 }
 
 
-#' Translation of parameters between (m, p , q) and (m, n1, t) using discrete time approach
+#' Translation of parameters between (m, p, q) and (m, n1, t) using discrete time approach
 #'
 #' @param m upper bound of the number of adoptions
 #' @param p coefficient of innovation
@@ -54,8 +54,9 @@ generate_diffusion_discrete <- function(m, p, q, t_min=0, t_max=20, dt=1) {
 #' @param n1 cumulative adoptions in the first period
 #' @param t timing when new adoptions start decreasing
 #' @param dt precision of time
+#' @param wt weight for n1 and t in finding (m, p, q)
 #'
-#' @return
+#' @return A list of translated parameters
 #' @export
 #'
 #' @examples

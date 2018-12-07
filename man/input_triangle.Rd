@@ -16,6 +16,6 @@ An elc.input object
 Input elicitation data as a triangle distribution
 }
 \examples{
-elc <- input_triangle(c(0.1, 0.1))
+elc <- input_triangle(c(10, 8, 12))
 elc
 }

@@ -45,8 +45,9 @@ generate_diffusion_continuous <- function(m, p, q, t_min=0, t_max=20, dt=1, ...)
 #' @param q coefficient of imitation
 #' @param n1 cumulative adoptions in the first period
 #' @param t timing when new adoptions start decreasing
+#' @param wt weight for n1 and t in finding (m, p, q)
 #'
-#' @return
+#' @return A list of translated parameters
 #' @export
 #'
 #' @examples
@@ -63,7 +64,7 @@ pq2nt_continuous <- function(m, p, q) {
 }
 
 
-#' @rdname pq2nt_countinuous
+#' @rdname pq2nt_continuous
 #' @export
 nt2pq_continuous <- function(m, n1, t, wt=c(0.5,0.5)) {
   if (n1 > m) {

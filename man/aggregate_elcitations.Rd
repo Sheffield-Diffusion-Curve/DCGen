@@ -2,16 +2,29 @@
 % Please edit documentation in R/elc_agg.R
 \name{aggregate_elcitations}
 \alias{aggregate_elcitations}
+\alias{print.elc.agg}
 \title{Pool elcitations data}
 \usage{
 aggregate_elcitations(elcs)
+
+\method{print}{elc.agg}(elcs, ...)
 }
 \arguments{
 \item{elcs}{a list of elcitation inputs}
+
+\item{...}{additional arguments passed to the integrator or to the methods}
 }
 \value{
 An aggregated elcitation object
 }
 \description{
 Pool elcitations data
+}
+\examples{
+expert1 <- input_norm(c(10, 2))
+expert2 <- input_gamma(c(0.1, 0.01))
+
+# Aggregated expert
+experts <- aggregate_elcitations(list(expert1, expert2))
+experts
 }

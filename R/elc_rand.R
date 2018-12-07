@@ -3,7 +3,7 @@
 #' @param elc an elication object elc.input or elc.agg
 #' @param n number of samples
 #' @param method "mixture" or "average" see below
-#' @param ...
+#' @param ... optional arguments
 #'
 #' @return a vector of sample values
 #' @export
@@ -25,12 +25,14 @@ rand_elcitation <- function(elc, n=1, ...) {
 
 
 #' @rdname rand_elcitation
+#' @export
 rand_elcitation.elc.input <- function(elc, n=1) {
   elc$rand(n)
 }
 
 
 #' @rdname rand_elcitation
+#' @export
 rand_elcitation.elc.agg <- function(elc, n=1, method=c("mixture", "average")) {
   method <- match.arg(method)
 

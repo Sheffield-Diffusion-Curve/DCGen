@@ -10,14 +10,15 @@ rand_elcitation(elc, n = 1, ...)
 
 \method{rand_elcitation}{elc.input}(elc, n = 1)
 
-\method{rand_elcitation}{elc.agg}(elc, n = 1, method = "mixture")
+\method{rand_elcitation}{elc.agg}(elc, n = 1, method = c("mixture",
+  "average"))
 }
 \arguments{
 \item{elc}{an elication object elc.input or elc.agg}
 
 \item{n}{number of samples}
 
-\item{...}{}
+\item{...}{optional arguments}
 
 \item{method}{"mixture" or "average" see below}
 }

@@ -70,7 +70,7 @@ input_norm <- function(pars) {
 #' @export
 #'
 #' @examples
-#' elc <- input_lnorm(c(0.1, 0.1))
+#' elc <- input_lnorm(c(2.5, 1))
 #' elc
 input_lnorm <- function(pars) {
   pars <- as.numeric(pars)[1:2]
@@ -102,7 +102,7 @@ input_lnorm <- function(pars) {
 #' @export
 #'
 #' @examples
-#' elc <- input_t(c(0.1, 0.1))
+#' elc <- input_t(c(10, 1, 20))
 #' elc
 input_t <- function(pars) {
   pars <- as.numeric(pars)[1:3]
@@ -134,7 +134,7 @@ input_t <- function(pars) {
 #' @export
 #'
 #' @examples
-#' elc <- input_lt(c(0.1, 0.1))
+#' elc <- input_lt(c(2.5, 1, 20))
 #' elc
 input_lt <- function(pars) {
   pars <- as.numeric(pars)[1:3]
@@ -166,7 +166,7 @@ input_lt <- function(pars) {
 #' @export
 #'
 #' @examples
-#' elc <- input_triangle(c(0.1, 0.1))
+#' elc <- input_triangle(c(10, 8, 12))
 #' elc
 input_triangle <- function(pars) {
   pars <- as.numeric(pars)[1:3]
@@ -194,12 +194,14 @@ input_triangle <- function(pars) {
 #'
 #' @param dist distribution of the input among ["Gamma", "Normal", "LogNormal", "StudentT", "Triangle"]
 #' @param pars a vector of parameters
+#' @param elc an elcitation object to be print
+#' @param ... additional arguments passed to the integrator or to the methods
 #'
 #' @return An elc.input object
 #' @export
 #'
 #' @examples
-#' elc <- input_elcitation("Gamma")
+#' elc <- input_elcitation("Gamma", c(0.1, 0.01))
 #' elc
 input_elcitation <- function(dist, pars) {
   inp <- switch (dist,
@@ -212,12 +214,10 @@ input_elcitation <- function(dist, pars) {
   inp(pars)
 }
 
-#' Print an elc.input object
-#'
-#' @param elc an elc.input object
-#'
+
+#' @rdname input_elcitation
 #' @export
-print.elc.input <- function(elc) {
+print.elc.input <- function(elc, ...) {
   cat("Inputed elicitation distribution\n")
   cat("\nDistribution:", elc$Distribution, "\n")
   cat("\nParameters:\n")

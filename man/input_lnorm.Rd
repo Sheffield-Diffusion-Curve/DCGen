@@ -16,6 +16,6 @@ An elc.input object
 Input elicitation data as a normal distribution
 }
 \examples{
-elc <- input_lnorm(c(0.1, 0.1))
+elc <- input_lnorm(c(2.5, 1))
 elc
 }
