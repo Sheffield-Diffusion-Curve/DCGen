@@ -194,28 +194,29 @@ input_triangle <- function(pars) {
 #'
 #' @param dist distribution of the input among ["Gamma", "Normal", "LogNormal", "StudentT", "Triangle"]
 #' @param pars a vector of parameters
-#' @param elc an elcitation object to be print
+#' @param elc an elicitation object to be print
 #' @param ... additional arguments passed to the integrator or to the methods
 #'
 #' @return An elc.input object
 #' @export
 #'
 #' @examples
-#' elc <- input_elcitation("Gamma", c(0.1, 0.01))
+#' elc <- input_elicitation("Gamma", c(0.1, 0.01))
 #' elc
-input_elcitation <- function(dist, pars) {
+input_elicitation <- function(dist, pars) {
   inp <- switch (dist,
     Gamma = input_gamma,
     Normal = input_norm,
     LogNormal = input_lnorm,
     StudentT = input_t,
+    LogStudentT = input_lt,
     Triangle = input_triangle
   )
   inp(pars)
 }
 
 
-#' @rdname input_elcitation
+#' @rdname input_elicitation
 #' @export
 print.elc.input <- function(elc, ...) {
   cat("Inputed elicitation distribution\n")

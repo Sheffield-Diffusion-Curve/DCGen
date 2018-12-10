@@ -1,9 +1,9 @@
-#' Pool elcitations data
+#' Pool elicitations data
 #'
-#' @param elcs a list of elcitation inputs
+#' @param elcs a list of elicitation inputs
 #' @param ... additional arguments passed to the integrator or to the methods
 #'
-#' @return An aggregated elcitation object
+#' @return An aggregated elicitation object
 #' @export
 #'
 #' @examples
@@ -11,9 +11,9 @@
 #' expert2 <- input_gamma(c(0.1, 0.01))
 #'
 #' # Aggregated expert
-#' experts <- aggregate_elcitations(list(expert1, expert2))
+#' experts <- aggregate_elicitations(list(expert1, expert2))
 #' experts
-aggregate_elcitations <- function(elcs) {
+aggregate_elicitations <- function(elcs) {
   res <- list()
   res$Sources <- elcs
   res$Distributions <- unique(sapply(elcs, function(x) x$Distribution))
@@ -26,7 +26,7 @@ aggregate_elcitations <- function(elcs) {
 }
 
 
-#' @rdname aggregate_elcitations
+#' @rdname aggregate_elicitations
 #' @export
 print.elc.agg <- function(elcs, ...) {
   cat("Aggregated elicitation distribution\n")

@@ -17,13 +17,24 @@ The diffusion estimates produced by the DCGen can be used for a variety of purpo
 
 
 #### Visualisation
-
+```r
+# Generate a diffusion curve with a (M, p, q) set 
+dc <- generate_diffusion_continuous(140, 0.03, 0.41)
+dc <- ts(dc[2:3], 0)
+ts.plot(dc, col=c("green", "blue"))
+legend("right", lty=1, legend=c("N", "dN"), col=c("green", "blue"))
+```
 
 #### Validation
 
 
 ### Webapp
 
+An online webapp developed with RShiny is available on 
+
+[Sheffield]()
+
+or [Source codes](https://github.com/Sheffield-Diffusion-Curve/DCGApp)
 
 
 ### References:

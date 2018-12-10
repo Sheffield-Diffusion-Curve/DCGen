@@ -13,30 +13,30 @@
 #' expert2 <- input_gamma(c(0.1, 0.01))
 #'
 #' # Single expert
-#' summary(rand_elcitation(expert1, 100))
+#' summary(rand_elicitation(expert1, 100))
 #'
 #' # Aggregated expert
-#' experts <- aggregate_elcitations(list(expert1, expert2))
-#' summary(rand_elcitation(experts, 100))
-rand_elcitation <- function(elc, n=1, ...) {
+#' experts <- aggregate_elicitations(list(expert1, expert2))
+#' summary(rand_elicitation(experts, 100))
+rand_elicitation <- function(elc, n=1, ...) {
   if (n < 1) stop("n must be larger than 0")
-  UseMethod("rand_elcitation", elc)
+  UseMethod("rand_elicitation", elc)
 }
 
 
-#' @rdname rand_elcitation
+#' @rdname rand_elicitation
 #' @export
-rand_elcitation.elc.input <- function(elc, n=1) {
+rand_elicitation.elc.input <- function(elc, n=1) {
   elc$rand(n)
 }
 
 
-#' @rdname rand_elcitation
+#' @rdname rand_elicitation
 #' @export
-rand_elcitation.elc.agg <- function(elc, n=1, method=c("mixture", "average")) {
+rand_elicitation.elc.agg <- function(elc, n=1, method=c("mixture", "average")) {
   method <- match.arg(method)
 
-  rd <- sapply(elc$Source, function(x) matrix(rand_elcitation(x, n)))
+  rd <- sapply(elc$Source, function(x) matrix(rand_elicitation(x, n)))
 
   if (is.matrix(rd)) {
     if (method == "mixture") {
