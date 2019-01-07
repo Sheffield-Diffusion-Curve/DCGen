@@ -12,5 +12,9 @@ Encoding: UTF-8
 LazyData: true
 Imports:
   triangle,
-  deSolve
+  deSolve,
+  ggplot2,
+  scales,
+  gridExtra,
+  knitr
 RoxygenNote: 6.1.1

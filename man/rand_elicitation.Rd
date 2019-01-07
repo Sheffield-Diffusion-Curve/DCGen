@@ -11,7 +11,7 @@ rand_elicitation(elc, n = 1, ...)
 \method{rand_elicitation}{elc.input}(elc, n = 1)
 
 \method{rand_elicitation}{elc.agg}(elc, n = 1, method = c("mixture",
-  "average"))
+  "average"), use = NULL)
 }
 \arguments{
 \item{elc}{an elication object elc.input or elc.agg}
@@ -21,6 +21,8 @@ rand_elicitation(elc, n = 1, ...)
 \item{...}{optional arguments}
 
 \item{method}{"mixture" or "average" see below}
+
+\item{use}{sampled indices if mixture applied}
 }
 \value{
 a vector of sample values

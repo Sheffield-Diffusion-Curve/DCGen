@@ -3,6 +3,7 @@
 #' @param elc an elication object elc.input or elc.agg
 #' @param n number of samples
 #' @param method "mixture" or "average" see below
+#' @param use sampled indices if mixture applied
 #' @param ... optional arguments
 #'
 #' @return a vector of sample values
@@ -33,18 +34,28 @@ rand_elicitation.elc.input <- function(elc, n=1) {
 
 #' @rdname rand_elicitation
 #' @export
-rand_elicitation.elc.agg <- function(elc, n=1, method=c("mixture", "average")) {
+rand_elicitation.elc.agg <- function(elc, n=1, method=c("mixture", "average"), use=NULL) {
   method <- match.arg(method)
 
   rd <- sapply(elc$Source, function(x) matrix(rand_elicitation(x, n)))
 
   if (is.matrix(rd)) {
     if (method == "mixture") {
-      return(rd[, sample(1:ncol(rd), nrow(rd), rep=T)][diag(n)==1])
+      if (is.null(use)) {
+        sam <- sample(1:ncol(rd), nrow(rd), replace=T)
+      } else {
+        sam <- use
+      }
+      return(list(i=sam, v=rd[, sam][diag(n)==1]))
     } else {
-      return(rowMeans(rd))
+      return(list(i="average", v=rowMeans(rd)))
     }
   } else {
-    return(mean(rd))
+    if (method == "mixture") {
+      return(list(i=1, v=mean(rd)))
+    } else {
+      return(list(i="average", v=mean(rd)))
+    }
+
   }
 }

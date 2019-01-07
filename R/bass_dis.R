@@ -63,7 +63,7 @@ generate_diffusion_discrete <- function(m, p, q, t_min=0, t_max=20, dt=1) {
 #' pq2nt_discrete(140, 0.03, 0.41)
 #' nt2pq_discrete(140, 5.94, 5.08)
 pq2nt_discrete <- function(m, p, q, dt=0.01) {
-  res <- list(m=m)
+  res <- list(M=m)
 
   tmax <- 1.5 * log(q/p)/(p+q)
 
@@ -83,7 +83,7 @@ pq2nt_discrete <- function(m, p, q, dt=0.01) {
     }
 
     if (t < 1+dt & t >= 1) {
-      res$n1 <- N1
+      res$N1 <- N1
     }
     dN0 <- dN1
   }
@@ -105,29 +105,28 @@ nt2pq_discrete <- function(m, n1, t, wt=c(0.5, 0.5)) {
 
   fr <- function(x) {
     sol <- pq2nt_discrete(m, x[1], x[2])
-
-    sum((c(n1, t) - c(sol$n1, sol$t))^2 * wt)
+    -sum(dnorm(c(n1, t), c(sol$n1, sol$t), sd=wt, log=T))
   }
 
   precision <- 0.01
 
-  grr <- function(x) {
-    x1u <- x; x1u[1] <- x[1] + precision * 1e-3
-    x1l <- x; x1l[1] <- x[1] - precision * 1e-3
-    x2u <- x; x2u[2] <- x[2] + precision * 1e-3
-    x2l <- x; x2l[2] <- x[2] - precision * 1e-3
+  # grr <- function(x) {
+  #   x1u <- x; x1u[1] <- x[1] + precision * 1e-3
+  #   x1l <- x; x1l[1] <- x[1] - precision * 1e-3
+  #   x2u <- x; x2u[2] <- x[2] + precision * 1e-3
+  #   x2l <- x; x2l[2] <- x[2] - precision * 1e-3
+  #
+  #   c(
+  #     (fr(x1u) - fr(x1l)) / (precision * 2e-3),
+  #     (fr(x2u) - fr(x2l)) / (precision * 2e-3)
+  #   )
+  # }
 
-    c(
-      (fr(x1u) - fr(x1l)) / (precision * 2e-3),
-      (fr(x2u) - fr(x2l)) / (precision * 2e-3)
-    )
-  }
-
-  res <- constrOptim(c(0.01, 1), fr, grr, ui = rbind(c(1, 0), c(0, 1), c(-1, 1)), ci = c(0, 0, 0))
+  res <- constrOptim(c(0.01, 1), fr, NULL, ui = rbind(c(1, 0), c(0, 1), c(-1, 1)), ci = c(0, 0, 0))
   res <- res$par
 
   return (list(
-    m=m,
+    M=m,
     p=res[1],
     q=res[2]
   ))

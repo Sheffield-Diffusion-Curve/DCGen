@@ -170,7 +170,6 @@ input_lt <- function(pars) {
 #' elc
 input_triangle <- function(pars) {
   pars <- as.numeric(pars)[1:3]
-  print(pars)
   names(pars) <- c("Peak", "Min", "Max")
 
   pr <- seq(0.005, 0.995, 0.005)
