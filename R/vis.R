@@ -107,7 +107,7 @@ visualise_curves <- function(curves, dN=F, statistics=T, ci_range=95,
                     "dN_avg", "dN_lc", "dN_uc")
 
 
-    g <- ggplot2::ggplot(data=dat, aes(x=Time)) +
+    g <- ggplot2::ggplot(data=dat, ggplot2::aes(x=Time)) +
       ggplot2::geom_line(ggplot2::aes(y=N_avg, colour="N(t)", linetype=average)) +
       ggplot2::geom_ribbon(ggplot2::aes(ymax=N_uc, ymin=N_lc, fill="N(t)"), alpha=0.2)
 

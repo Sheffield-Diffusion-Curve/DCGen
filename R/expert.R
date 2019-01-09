@@ -158,9 +158,11 @@ rand_parameters.expert <- function(expert, n=100, max_try=20, type=c("continuous
   collected <- data.frame(collected, row.names=NULL)
   collected$Expert = expert$Name
   collected <- collected[c("Expert", "M", "N1", "t", "p", "q")]
+  collected$Expert <- unlist(collected$Expert)
+  collected[c("M", "N1", "t", "p", "q")] <- apply((collected[, c("M", "N1", "t", "p", "q")]), 2, unlist)
 
-  p <- unlist(collected$p)
-  q <- unlist(collected$q)
+  p <- collected$p
+  q <- collected$q
   collected$tf <- log(q/p)/(p+q)
   epq <- exp(-(p+q))
   collected$N1f <- unlist(collected$M)*(1-epq)/(1+q/p*epq)
@@ -228,7 +230,8 @@ rand_parameters.experts <- function(expert, n=100, method=c("mixture", "average"
   }
   collected <- data.frame(collected, row.names=NULL)
   collected <- collected[c("Expert", "M", "N1", "t", "p", "q")]
-
+  collected$Expert <- unlist(collected$Expert)
+  collected[c("M", "N1", "t", "p", "q")] <- apply((collected[, c("M", "N1", "t", "p", "q")]), 2, unlist)
   p <- unlist(collected$p)
   q <- unlist(collected$q)
   epq <- exp(-(p+q))
