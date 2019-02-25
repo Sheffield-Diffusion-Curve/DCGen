@@ -51,7 +51,7 @@ head(pars)
 
 ### Translate elicitation data to Bass Diffusion Curves
 ```r
-
+cvs <- generate_diffusion_curves(pars, t_max=20)
 ```
 
 #### Visualisation
@@ -61,6 +61,7 @@ Visualise input distributions
 ```r
 visualise_inputs(pars)
 ```
+![Input](figures/input.jpeg)
 
 Visualise fitted parameters
 
@@ -68,22 +69,25 @@ Visualise fitted parameters
 
 visualise_fitted(pars)
 ```
+![Fitted](figures/fitted.jpeg)
 
 Visualise output curves
 
 ```r
 visualise_curves(cvs, dN=T)
 ```
+![Diffusion Curves](figures/curves.jpeg)
 
 #### Validation
 
 Compare input parameters to the fitted parameters.
-If points shift much, elicitation results probably do not fit the Bass diffusion function
+If points shift much, elicitation results probably do not fit the Bass diffusion function.
+For the following example, the Expert B provided inappropriate inputs.
 
 ```r
 visualise_comparing(pars)
 ```
-
+![Validation](figures/Compare.jpeg)
 
 ### Webapp
 
