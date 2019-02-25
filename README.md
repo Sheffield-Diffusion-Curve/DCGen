@@ -25,20 +25,6 @@ ExpC = new_expert("C", "Triangle", c(204.4, 30, 410), "Triangle", c(7.1, 2, 10),
 ```
 
 
-experts <- aggregate_experts(list(ExpA, ExpB, ExpC))
-
-
-pars <- rand_parameters(experts, 300, method='mixture', type='continuous')
-
-cvs <- generate_diffusion_curves(pars, t_max=20)
-
-
-visualise_inputs(pars)
-visualise_fitted(pars)
-visualise_comparing(pars)
-
-visualise_curves(cvs, dN=T)
-
 ### Aggregate elicitation data
 ```r
 experts <- aggregate_experts(list(ExpA, ExpB, ExpC))
