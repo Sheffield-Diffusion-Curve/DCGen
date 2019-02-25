@@ -131,17 +131,19 @@ rand_parameters.expert <- function(expert, n=100, max_try=20, type=c("continuous
   repeat {
     temp <- c()
     for (i in 1:nrow(mnt)) {
-      if (type == "continuous") {
-        d <- tryCatch({nt2pq_continuous(mnt[i, "M"], mnt[i, "N1"], mnt[i, "t"], wt)},
-                      warning=function(w) {list()})
-      } else {
-        d <- tryCatch({nt2pq_discrete(mnt[i, "M"], mnt[i, "N1"], mnt[i, "t"], wt)},
-                      warning=function(w) {list()})
-      }
+      if (mnt[i, "M"] > mnt[i, "N1"]) {
+        if (type == "continuous") {
+          d <- tryCatch({nt2pq_continuous(mnt[i, "M"], mnt[i, "N1"], mnt[i, "t"], wt)},
+                        warning=function(w) {list()})
+        } else {
+          d <- tryCatch({nt2pq_discrete(mnt[i, "M"], mnt[i, "N1"], mnt[i, "t"], wt)},
+                        warning=function(w) {list()})
+        }
 
-      d$N1 <- mnt[i, "N1"]
-      d$t <- mnt[i, "t"]
-      temp <- rbind(temp, d)
+        d$N1 <- mnt[i, "N1"]
+        d$t <- mnt[i, "t"]
+        temp <- rbind(temp, d)
+      }
     }
     collected <- rbind(collected, temp)
     n_try <- n_try + 1
@@ -197,18 +199,20 @@ rand_parameters.experts <- function(expert, n=100, method=c("mixture", "average"
   repeat {
     temp <- c()
     for (i in 1:nrow(mnt)) {
-      if (type == "continuous") {
+      if (mnt[i, "M"] > mnt[i, "N1"]) {
+        if (type == "continuous") {
         d <- tryCatch({nt2pq_continuous(mnt[i, "M"], mnt[i, "N1"], mnt[i, "t"], wt)},
-                      warning=function(w) {list()})
-      } else {
-        d <- tryCatch({nt2pq_discrete(mnt[i, "M"], mnt[i, "N1"], mnt[i, "t"], wt)},
-                      warning=function(w) {list()})
-      }
+                        warning=function(w) {list()})
+        } else {
+          d <- tryCatch({nt2pq_discrete(mnt[i, "M"], mnt[i, "N1"], mnt[i, "t"], wt)},
+                        warning=function(w) {list()})
+        }
 
-      d$N1 <- mnt[i, "N1"]
-      d$t <- mnt[i, "t"]
-      d$Expert <- mnt[i, "Expert"]
-      temp <- rbind(temp, d)
+        d$N1 <- mnt[i, "N1"]
+        d$t <- mnt[i, "t"]
+        d$Expert <- mnt[i, "Expert"]
+        temp <- rbind(temp, d)
+      }
     }
     collected <- rbind(collected, temp)
     n_try <- n_try + 1
